@@ -39,14 +39,14 @@ function ctrl_c() {
 }
 
 function myinstall () {
-    $SUDO echo -ne "Installing unrar_parts: ..."
+    $SUDO echo -ne "Installing unrar_parts: ... "
     $SUDO cp -f "$0" $INSTALL_PATH
     echo "DONE"
     exit 0
 }
 
 function myuninstall () {
-    $SUDO echo -ne "Removing unrar_parts from system: ..."
+    $SUDO echo -ne "Removing unrar_parts from system: ... "
     $SUDO rm -rf $INSTALL_PATH
     echo "DONE"
     exit 0
@@ -55,7 +55,7 @@ function myuninstall () {
 show_help () {
     echo "Usage: unrar_parts [options] [direcotry]"
     echo "------------------------------------------------------------------"
-    echo -e "directory\t Path to directory with rar files splited to parts"
+    echo -e "directory\t Path to directory with rar files splitted to parts"
     echo -e "\t\t If not set current directory will be used (pwd)"
     echo -e "--install\t Copy script to '$INSTALL_PATH'"
     echo -e "--uninstall\t Remove script '$INSTALL_PATH'"
