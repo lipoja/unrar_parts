@@ -1,6 +1,12 @@
 #!/bin/bash
-
-
+#############################################
+#            U N R A R _ P A R T S          #
+# ----------------------------------------- #
+# Author: Jan Lipovský                      #
+# E-mail: janlipovsky@gmail.com             #
+# Licence: MIT                              #
+# https://github.com/lipoja/unrar_parts.git #
+#############################################
 
 # First test if unrar is installed
 tmp=`which unrar`
@@ -22,7 +28,6 @@ if [ "$(whoami)" != "root" ]; then
 else
     SUDO=""
 fi
-
 
 trap ctrl_c INT
 
@@ -95,7 +100,7 @@ if [ -d "$DIRECTORY" ]; then
     done
 
     if [ $PROCESSED_FILES -eq 0 ]; then
-        echo "Nothing to process"
+        echo "Nothing to process. No files with \"part1.rar\" were found."
     else
         echo "Processed $PROCESSED_FILES groups of rar files"
     fi
