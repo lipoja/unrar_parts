@@ -1,14 +1,17 @@
 #!/bin/bash
+
 #############################################
 #            U N R A R _ P A R T S          #
 # ----------------------------------------- #
-# Author: Jan Lipovský                      #
+# Author: Jan Lipovský, janlipovsky.cz      #
 # E-mail: janlipovsky@gmail.com             #
 # Licence: MIT                              #
 # https://github.com/lipoja/unrar_parts.git #
 #############################################
 
 # First test if unrar is installed
+
+# Test if unrar is installed
 tmp=`which unrar`
 if [ $? -ne 0 ]; then
     echo "ERROR: unrar is not installed or is not in PATH"
@@ -23,15 +26,21 @@ if [ "$#" -eq 0 ]; then
     DIRECTORY=`pwd`"/"
 fi
 
-if [ "$(whoami)" != "root" ]; then
+tmp=`which whoami`
+if [ $? -ne 0 ]; then
+    echo "WARNING: whoami is not installed or is not in PATH"
     SUDO="sudo"
 else
-    SUDO=""
+    if [ "$(whoami)" != "root" ]; then
+        SUDO="sudo"
+    else
+        SUDO=""
+    fi
 fi
 
+# catching sigint
 trap ctrl_c INT
 
-# catching sigint
 function ctrl_c() {
         echo "** Script stopped by user CTRL-C"
         cd "$PWDir"
@@ -102,7 +111,11 @@ if [ -d "$DIRECTORY" ]; then
     if [ $PROCESSED_FILES -eq 0 ]; then
         echo "Nothing to process. No files with \"part1.rar\" were found."
     else
-        echo "Processed $PROCESSED_FILES groups of rar files"
+        if [ $PROCESSED_FILES -eq 1 ]; then
+            echo "Processed $PROCESSED_FILES group of rar files"
+        else
+            echo "Processed $PROCESSED_FILES groups of rar files"
+        fi
     fi
 else
     echo "ERROR: Directory does not exist [$DIRECTORY]"
